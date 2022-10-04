@@ -141,10 +141,13 @@ const App = () => {
                     >{`built by @${TWITTER_HANDLE}`}</a>
                     <a
                         className="footer-text"
+                    > </a>
+                    <a
+                        className="footer-text"
                         href="https://twitter.com/_buildspace"
                         target="_blank"
                         rel="noreferrer"
-                    > with @_buildspace community</a>
+                    >with @_buildspace community</a>
                 </div>
             </div>
         </div>
