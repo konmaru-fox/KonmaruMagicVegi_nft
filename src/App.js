@@ -127,7 +127,7 @@ const App = () => {
                 <div className="header-container">
                     <p className="header gradient-text">KonmaruMagicVegi NFT Collection</p>
                     <p className="sub-text">
-                        Each mindful. Each leading. Discover your Magical Vegi today.
+                        Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
                     {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
                 </div>
@@ -144,7 +144,7 @@ const App = () => {
                         href="https://twitter.com/_buildspace"
                         target="_blank"
                         rel="noreferrer"
-                    >with @_buildspace community</a>
+                    > with @_buildspace community</a>
                 </div>
             </div>
         </div>
