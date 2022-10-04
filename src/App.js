@@ -8,7 +8,7 @@ const TWITTER_HANDLE = '_buildspace';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const TOTAL_MINT_COUNT = 50;
 
-const CONTRACT_ADDRESS = "0x885aC46C1541cc6Dbc3d5791A7eF63DF2d9E9aD2";
+const CONTRACT_ADDRESS = "0xcC479E2654A3157dD09e56d9865508eF830a731f";
 
 const App = () => {
     
