@@ -134,15 +134,17 @@ const App = () => {
                 <div className="footer-container">
                     <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
                     <p className="footer-text">
-                        built <a  
+                        built by <a
+                            className="footer-text"  
                             href={TWITTER_LINK}
                             target="_blank"
                             rel="noreferrer"
-                        >{`by @${TWITTER_HANDLE}`}</a>, with <a
+                        >{`@${TWITTER_HANDLE}`}</a>, with <a
+                            className="footer-text"
                             href="https://twitter.com/_buildspace"
                             target="_blank"
                             rel="noreferrer"
-                        >@_buildspace community</a>
+                        >@_buildspace</a> community
                     </p>             
                 </div>
             </div>
