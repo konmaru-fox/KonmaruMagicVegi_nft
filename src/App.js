@@ -1,14 +1,15 @@
 import './styles/App.css';
 import twitterLogo from './assets/twitter-logo.svg';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const TWITTER_HANDLE = '_buildspace';
-const TWITTER_LINK = 'https://twitter.com/${TWITTER_HANDLE}';
+const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const OPENSEA_LINK = '';
 const TOTAL_MINT_COUNT = 50;
 
 const App = () => {
-    const checkIfWalletIsConnected = () => {
+    const [currentAccount, setCurrentAccount] = useState("");
+    const checkIfWalletIsConnected = async () => {
         const { ethereum } = window;
 
         if (!ethereum) {
@@ -16,6 +17,15 @@ const App = () => {
             return;
         } else {
             console.log("We have the ethereum object", ethereum);
+        }
+
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length !== 0) {
+            const account = accounts[0];
+            console.log("Found an authorized account:", account);
+            setCurrentAccount(account);
+        } else {
+            console.log("No authorized account found");
         }
     }
 
@@ -35,7 +45,7 @@ const App = () => {
                 <div className="header-container">
                     <p className="header gradient-text">KonmaruMagicVegi NFT Collection</p>
                     <p className="sub-text">
-                        Each mindset. Each way to go. Discover your Magical Vegi today.
+                        Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
                     {renderNotConnectedContainer()}
                 </div>
