@@ -6,7 +6,7 @@ import myEpicNft from './utils/MyEpicNFT.json';
 
 const TWITTER_HANDLE = 'konmaru_fox';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-const TOTAL_MINT_COUNT = 50;
+const TOTAL_MINT_COUNT = 100;
 
 const CONTRACT_ADDRESS = "0xcC479E2654A3157dD09e56d9865508eF830a731f";
 
@@ -34,6 +34,14 @@ const App = () => {
         } else {
             console.log("No authorized account found");
         }
+    }
+
+    const getTotalNFTsMintedSofar = async () => {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+        let nft = await connectedContract.getTotalNFTsMintedSoFar();
+        return nft;
     }
 
     const connectWallet = async () => {
@@ -128,6 +136,9 @@ const App = () => {
                     <p className="header gradient-text">KonmaruMagicVegi NFT Collection</p>
                     <p className="sub-text">
                         Each mindset. Each way. Discover your Magical Vegi today.
+                    </p>
+                    <p className="sub-text">
+                        {getTotalNFTsMintedSofar}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
                     {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
                 </div>
