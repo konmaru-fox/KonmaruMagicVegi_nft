@@ -158,7 +158,7 @@ const App = () => {
                     <p className="sub-text">
                         Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
-                    <a href='https://testnets.opensea.io/collection/konmarumagicvegi-nft-1'>
+                    <a href='https://testnets.opensea.io/collection/konmarumagicvegi-nft-1' target="_blank">
                         <button className="cta-button connect-wallet-button">
                             View Collection on OpenSea
                         </button>
