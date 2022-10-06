@@ -158,9 +158,11 @@ const App = () => {
                     <p className="sub-text">
                         Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
-                    <form action="https://testnets.opensea.io/collection/konmarumagicvegi-nft-1" className="cta-button connect-wallet-button">
-                        <input type="submit" value="View Collection on OpenSea" />
-                    </form>
+                    <a href='https://testnets.opensea.io/collection/konmarumagicvegi-nft-1'>
+                        <button className="cta-button connect-wallet-button">
+                            View Collection on OpenSea
+                        </button>
+                    </a>
                     <p className="sub-text">
                         {nftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
