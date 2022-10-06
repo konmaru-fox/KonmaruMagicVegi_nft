@@ -13,6 +13,7 @@ const CONTRACT_ADDRESS = "0xb8540d08964c090d750f4eD73B43029bFC181F3C";
 const App = () => {
     
     const [currentAccount, setCurrentAccount] = useState("");
+    const [nftCount, setNftCount] = useState("");
 
     const checkIfWalletIsConnected = async () => {
         const { ethereum } = window;
@@ -36,16 +37,14 @@ const App = () => {
         }
     }
 
-    const getTotalNFTsMintedSofar = async () => {
+    const getNftCount = async () => {
         try {
-            const { ethereum } = window;
-
-            if (ethereum) {
+            if (window.ethereum) {
                 const provider = new ethers.providers.Web3Provider(ethereum);
                 const signer = provider.getSigner();
                 const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
-                let nft = await connectedContract.getTotalNFTsMintedSoFar();
-                return nft;
+                const nft_no = await connectedContract.getTotalNFTsMintedSoFar();
+                setNftCount(nft_no.toString());
             }   else {
                     console.log("Ethereum object doesn't exist!");
                 }
@@ -133,6 +132,10 @@ const App = () => {
         checkIfWalletIsConnected();
     }, [])
 
+    useEffect(() => {
+        getNftCount();
+    }, [])
+
     const renderNotConnectedContainer = () => (
         <button onClick={connectWallet} className="cta-button connect-wallet-button">
             Connect to Wallet
@@ -153,11 +156,11 @@ const App = () => {
                     <p className="sub-text">
                         Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
-                    <button onclick="window.location.href='https://testnets.opensea.io/collection/konmarumagicvegi-nft-1';" className="cta-button connect-wallet-button">
-                        View Collection on OpenSea
-                    </button>
+                    <form action="https://testnets.opensea.io/collection/konmarumagicvegi-nft-1" className="cta-button connect-wallet-button">
+                        <input type="submit" value="View Collection on OpenSea" />
+                    </form>
                     <p className="sub-text">
-                        {getTotalNFTsMintedSofar}/{TOTAL_MINT_COUNT} NFTs minted so far.
+                        {nftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
                     {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
                 </div>
