@@ -13,7 +13,7 @@ const CONTRACT_ADDRESS = "0xb8540d08964c090d750f4eD73B43029bFC181F3C";
 const App = () => {
     
     const [currentAccount, setCurrentAccount] = useState("");
-    const [nftCount, setNftCount] = useState("");
+    // const [nftCount, setNftCount] = useState("");
 
     const checkIfWalletIsConnected = async () => {
         const { ethereum } = window;
@@ -46,7 +46,7 @@ const App = () => {
                 const signer = provider.getSigner();
                 const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
                 const nft_no = await connectedContract.getTotalNFTsMintedSoFar();
-                setNftCount(nft_no.toString());
+                return nft_no.toString();
             }   else {
                     console.log("Ethereum object doesn't exist!");
                 }
@@ -134,9 +134,9 @@ const App = () => {
         checkIfWalletIsConnected();
     }, [])
 
-    useEffect(() => {
-        getNftCount();
-    }, [])
+    // useEffect(() => {
+    //     getNftCount();
+    // }, [])
 
     const renderNotConnectedContainer = () => (
         <button onClick={connectWallet} className="cta-button connect-wallet-button">
@@ -164,7 +164,7 @@ const App = () => {
                         </button>
                     </a>
                     <p className="sub-text">
-                        {nftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
+                        {getNftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
                     {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
                 </div>
