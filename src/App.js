@@ -13,8 +13,26 @@ const CONTRACT_ADDRESS = "0xb8540d08964c090d750f4eD73B43029bFC181F3C";
 const App = () => {
     
     const [currentAccount, setCurrentAccount] = useState("");
-    // const [nftCount, setNftCount] = useState("");
+    const [nftCount, setNftCount] = useState("");
 
+    const getNftCount = async () => {
+        try {
+            const { ethereum } = window;
+
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+                const nft_no = await connectedContract.getTotalNFTsMintedSoFar();
+                setNftCount(nft_no.toString());
+            }   else {
+                    console.log("Ethereum object doesn't exist!");
+                }
+            } catch (error) {
+                console.log(error)
+            }
+    }
+    
     const checkIfWalletIsConnected = async () => {
         const { ethereum } = window;
 
@@ -35,24 +53,6 @@ const App = () => {
         } else {
             console.log("No authorized account found");
         }
-    }
-
-    const getNftCount = async () => {
-        try {
-            const { ethereum } = window;
-
-            if (ethereum) {
-                const provider = new ethers.providers.Web3Provider(ethereum);
-                const signer = provider.getSigner();
-                const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
-                const nft_no = await connectedContract.getTotalNFTsMintedSoFar();
-                return nft_no.toString();
-            }   else {
-                    console.log("Ethereum object doesn't exist!");
-                }
-            } catch (error) {
-                console.log(error)
-            }
     }
 
     const connectWallet = async () => {
@@ -134,9 +134,9 @@ const App = () => {
         checkIfWalletIsConnected();
     }, [])
 
-    // useEffect(() => {
-    //     getNftCount();
-    // }, [])
+    useEffect(() => {
+        getNftCount();
+    }, [])
 
     const renderNotConnectedContainer = () => (
         <button onClick={connectWallet} className="cta-button connect-wallet-button">
@@ -164,7 +164,7 @@ const App = () => {
                         </button>
                     </a>
                     <p className="sub-text">
-                        {getNftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
+                        {nftCount}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
                     {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
                 </div>
