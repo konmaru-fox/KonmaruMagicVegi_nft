@@ -8,7 +8,7 @@ const TWITTER_HANDLE = 'konmaru_fox';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const TOTAL_MINT_COUNT = 100;
 
-const CONTRACT_ADDRESS = "0xcC479E2654A3157dD09e56d9865508eF830a731f";
+const CONTRACT_ADDRESS = "0xb8540d08964c090d750f4eD73B43029bFC181F3C";
 
 const App = () => {
     
@@ -54,9 +54,15 @@ const App = () => {
             }
 
             const accounts = await ethereum.request({ method: "eth_requestAccounts"});
+            let chainId = await ethereum.request({ method: 'eth_chainId' });
+            const goerliChainId = "0x5";
 
-            console.log("Connected", accounts[0]);
-            setCurrentAccount(accounts[0]);
+            console.log("Connected to chain " + chainId, accounts[0]);
+            if (chainId !== goerliChainId) {
+                alert("You are not connected to the Goerli Test Network!");
+            } else {
+                setCurrentAccount(accounts[0]);
+            }
 
             setupEventListener()
         } catch (error) {
@@ -124,7 +130,7 @@ const App = () => {
     );
 
     const renderMintUI = () => (
-        <button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
+        <button onClick={askContractToMintNft} className="cta-button mint-button">
             Mint NFT
         </button>
     )

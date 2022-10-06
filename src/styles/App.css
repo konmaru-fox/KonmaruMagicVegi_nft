@@ -29,7 +29,7 @@
 }
 
 .gradient-text {
-    background: -webkit-linear-gradient(left, #c56c60 30%, #c8e235 60%);
+    background: -webkit-linear-gradient(left, #c56c60 30%, #38e235 60%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -49,7 +49,7 @@
 }
 
 .connect-wallet-button {
-    background: -webkit-linear-gradient(left, #c56c60, #c8e235);
+    background: -webkit-linear-gradient(left, #c56c60, #38e235);
     background-size: 200% 200%;
     animation: gradient-animation 4s ease infinite;
 }
