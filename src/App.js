@@ -37,6 +37,15 @@ const App = () => {
     }
 
     const getTotalNFTsMintedSofar = async () => {
+        const { ethereum } = window;
+
+        if (!ethereum) {
+            console.log("Make sure you have matamask!");
+            return;
+        } else {
+            console.log("We have the ethereum object", ethereum);
+        }
+        
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
