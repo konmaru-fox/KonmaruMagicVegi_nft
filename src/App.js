@@ -37,20 +37,21 @@ const App = () => {
     }
 
     const getTotalNFTsMintedSofar = async () => {
-        const { ethereum } = window;
+        try {
+            const { ethereum } = window;
 
-        if (!ethereum) {
-            console.log("Make sure you have matamask!");
-            return;
-        } else {
-            console.log("We have the ethereum object", ethereum);
-        }
-        
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
-        let nft = await connectedContract.getTotalNFTsMintedSoFar();
-        return nft;
+            if (ethereum) {
+                const provider = new ethers.providers.Web3Provider(ethereum);
+                const signer = provider.getSigner();
+                const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, myEpicNft.abi, signer);
+                let nft = await connectedContract.getTotalNFTsMintedSoFar();
+                return nft;
+            }   else {
+                    console.log("Ethereum object doesn't exist!");
+                }
+            } catch (error) {
+                console.log(error)
+            }
     }
 
     const connectWallet = async () => {
@@ -152,6 +153,9 @@ const App = () => {
                     <p className="sub-text">
                         Each mindset. Each way. Discover your Magical Vegi today.
                     </p>
+                    <button onclick="window.location.href='https://testnets.opensea.io/collection/konmarumagicvegi-nft-1';" className="cta-button connect-wallet-button">
+                        View Collection on OpenSea
+                    </button>
                     <p className="sub-text">
                         {getTotalNFTsMintedSofar}/{TOTAL_MINT_COUNT} NFTs minted so far.
                     </p>
